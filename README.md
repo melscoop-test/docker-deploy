@@ -1,2 +1,2 @@
 # docker-deploy
-testing a docker deployment :-)
+testing a docker swarm deployment :-)
