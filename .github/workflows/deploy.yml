@@ -1,9 +1,8 @@
 name: Deploy to swarm
 
 on:
-  push:
-    branches:
-      - master
+  push
+
 
 env:
   REMOTE_USER: git
