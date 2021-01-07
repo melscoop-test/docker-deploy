@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  web:
+    image: ghcr.io/melscoop/my-fancy-app
+    secrets:
+      - github-registry-secrets
+    networks:
+      - traefik-public
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - traefik.enable=true
+        - traefik.http.services.my-fancy-app.loadbalancer.server.port=5000
+        - traefik.http.routers.my-fancy-app.rule=Host(`my-fancy-app.mydomain.com`)
+        - traefik.http.routers.my-fancy-app.entrypoints=http,https
+        - traefik.http.routers.my-fancy-app.middlewares=redirect@file
+
+secrets:
+  github-registry-secrets:
+    external: true
+
+networks:
+  traefik-public:
+    external: true
